@@ -5,13 +5,20 @@ const userApiConfig = apiSlice.enhanceEndpoints({ addTagTypes: ["User"] });
 const userApi = userApiConfig.injectEndpoints({
   endpoints: (builder) => ({
     getCurrentUser: builder.query({
-      query: () => `/user`,
+      query: () => `/dashboard`,
       providesTags: ["User"],
       keepUnusedDataFor: 5,
     }),
-    editProfile: builder.mutation({
-      query: ({ formdata }) => ({
-        url: `/update-profile`,
+    getUser: builder.query({
+      query: ({ userid }) => ({
+        url: `/user-details/${userid}`,
+      }),
+      keepUnusedDataFor: 5,
+      providesTags: ["User"],
+    }),
+    deactivateCustomer: builder.mutation({
+      query: ({ formdata, userid }) => ({
+        url: `/activate-deactive-account/${userid}`,
         method: `POST`,
         body: formdata,
       }),
@@ -21,4 +28,8 @@ const userApi = userApiConfig.injectEndpoints({
   overrideExisting: true,
 });
 
-export const { useGetCurrentUserQuery, useEditProfileMutation } = userApi;
+export const {
+  useGetCurrentUserQuery,
+  useGetUserQuery,
+  useDeactivateCustomerMutation,
+} = userApi;

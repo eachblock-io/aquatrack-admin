@@ -1,10 +1,9 @@
-import DashboardComponent from "@/components/Dashboard";
-import Image from "next/image";
+import LoginForm from "@/components/LoginForm";
 
 const DashboardPage = () => {
   return (
     <div>
-      <DashboardComponent />
+      <LoginForm />
     </div>
   );
 };

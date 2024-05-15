@@ -1,6 +1,6 @@
 import { Payment } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "../../../ui/button";
+import { Button } from "../ui/button";
 import { MoreVertical } from "lucide-react";
 import {
   DropdownMenu,
@@ -128,7 +128,9 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-3 md:w-5 lg:w-8 p-0 bg-white">
+            <Button
+              variant="ghost"
+              className="h-8 w-3 md:w-5 lg:w-8 p-0 bg-white">
               <span className="sr-only">Open menu</span>
               <MoreVertical className="h-4 w-4" />
             </Button>
@@ -136,8 +138,7 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end" className="bg-white">
             <Link href={`/${payment.id}`}>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(payment.id)}
-              >
+                onClick={() => navigator.clipboard.writeText(payment.id)}>
                 View Details
               </DropdownMenuItem>
             </Link>

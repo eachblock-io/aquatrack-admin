@@ -34,7 +34,8 @@ import { columns } from "./Columns";
 import Pagination from "@/components/common/Pagination";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-export function DashboardTable() {
+export function DashboardTable({ data }: any) {
+  console.log(data);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -46,14 +47,14 @@ export function DashboardTable() {
   const isMobile = useMediaQuery("(max-width:901px)");
   const [page, setPage] = React.useState(1);
   const itemsPerPage = isMobile ? 5 : 10;
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(data?.data?.length / itemsPerPage);
   const onPageChange = (pageNumber: number) => {
     setPage(pageNumber);
   };
 
   const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage, data.length);
-  const currentPageData = data.slice(startIndex, endIndex);
+  const endIndex = Math.min(startIndex + itemsPerPage, data?.length);
+  const currentPageData = data?.data?.slice(startIndex, endIndex);
 
   const table = useReactTable({
     data: currentPageData,
@@ -72,6 +73,8 @@ export function DashboardTable() {
       rowSelection,
     },
   });
+
+  // console.log(data);
 
   return (
     <div className="w-full">
@@ -105,8 +108,7 @@ export function DashboardTable() {
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
-                    }
-                  >
+                    }>
                     {column.id}
                   </DropdownMenuCheckboxItem>
                 );
@@ -115,9 +117,9 @@ export function DashboardTable() {
         </DropdownMenu>
       </div>
       <div className="rounded-[10px] border bg-[#FFFFFF]">
-        <Table>
+        {/* <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table?.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
@@ -135,12 +137,11 @@ export function DashboardTable() {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+            {table?.getRowModel().rows?.length ? (
+              table?.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                  data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
@@ -155,14 +156,13 @@ export function DashboardTable() {
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                  className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
-        </Table>
+        </Table> */}
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div>

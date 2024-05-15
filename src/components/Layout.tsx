@@ -1,10 +1,10 @@
-import MainDashboard from "./component/Maindashboard";
-import Sidebar from "../common/Nav/Sidebar";
-import MobileNavbar from "../common/Nav/MobileNavbar";
+import React from "react";
+import Sidebar from "./common/Nav/Sidebar";
+import MobileNavbar from "./common/Nav/MobileNavbar";
 
-const DashboardComponent = () => {
+const Layout = ({ children }: any) => {
   return (
-    <div className="grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] text-[#121417]">
+    <div className="grid md:grid-cols-[220px_1fr] lg:grid-cols-[220px_1fr] text-[#121417]">
       <div className="hidden bg-muted/40 md:block ">
         <div className="sticky top-0 flex flex-col ">
           <Sidebar />
@@ -15,11 +15,11 @@ const DashboardComponent = () => {
           <MobileNavbar />
         </header>
         <main className="flex flex-1 flex-col gap-4 bg-[#FCFCFC] py-4 lg:gap-6 border-l lg:py-6">
-          <MainDashboard />
+          {children}
         </main>
       </div>
     </div>
   );
 };
 
-export default DashboardComponent;
+export default Layout;
